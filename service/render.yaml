@@ -1,0 +1,16 @@
+# Render blueprint for the FastAPI service only.
+# Used when you deploy the service on its own (no dashboard).
+services:
+  - type: web
+    name: gridwise-service
+    runtime: python
+    rootDir: .
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GRIDWISE_ALLOWED_ORIGINS
+        value: "*"
+      - key: PYTHON_VERSION
+        value: 3.11.0

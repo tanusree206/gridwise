@@ -1,0 +1,33 @@
+# Render blueprint — deploys the FastAPI service + Next.js dashboard.
+# In Render: New → Blueprint → point at this repo. Render reads this file
+# and creates both services with one click.
+
+services:
+  - type: web
+    name: gridwise-service
+    runtime: python
+    rootDir: service
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GRIDWISE_ALLOWED_ORIGINS
+        value: "*"
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  - type: web
+    name: gridwise-dashboard
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    envVars:
+      - key: NEXT_PUBLIC_API_BASE
+        # Render sets this automatically because gridwise-service is
+        # declared first; the dashboard reads it at build time.
+        value: https://gridwise-service.onrender.com
+      - key: NODE_VERSION
+        value: 20.11.0

@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #06080f;
+  color: #e6ecff;
+}
+
+body {
+  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  background-image:
+    radial-gradient(ellipse at top, rgba(34, 211, 164, 0.10), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(96, 165, 250, 0.10), transparent 60%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background-color: rgba(34, 211, 164, 0.35);
+  color: #fff;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-grid-border bg-grid-card/80 backdrop-blur-sm p-5 shadow-lg;
+  }
+  .card-hover {
+    @apply transition hover:border-grid-accent/40 hover:shadow-glow;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition;
+  }
+  .btn-primary {
+    @apply btn bg-grid-accent text-grid-bg hover:bg-grid-accent/90 shadow-glow;
+  }
+  .btn-ghost {
+    @apply btn border border-grid-border bg-grid-card text-grid-text hover:border-grid-accent/40;
+  }
+  .stat {
+    @apply text-3xl font-semibold tracking-tight text-grid-text;
+  }
+  .stat-label {
+    @apply text-xs uppercase tracking-wider text-grid-muted;
+  }
+  .divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-grid-border to-transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(34, 211, 164, 0.25);
+    border-radius: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(34, 211, 164, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 164, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
